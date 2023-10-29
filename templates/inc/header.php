@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<link rel="stylesheet" href="css/styles.css">
     <title>Header Sessions</title>
     <?php
     $urls = array();
@@ -30,31 +31,68 @@
     }
     ?>
 
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        body {
+            background-color: #FEFEFE;
+        }
+
+        .navbar {
+            background-color: #10539F;
+        }
+
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #FFBE00;
+        }
+
+        .navbar-dark .navbar-toggler {
+            border: 2px solid #FFBE00;
+        }
+
+        .navbar-dark .navbar-toggler:focus,
+        .navbar-dark .navbar-toggler:hover {
+            background-color: #FFBE00;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #FEFEFE;
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #FFBE00;
+        }
+
+        .footer {
+            background-color: #264964;
+            color: #FEFEFE;
+        }
+
+        .footer a {
+            color: #FFBE00;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header Navigation -->
-    <div>
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
-            <a class="navbar-brand" href="index.php">
-                <?php echo SITE_TITLE; ?>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="create.php">Create</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark p-4">
+        <a class="navbar-brand" href="index.php">
+            <?php echo SITE_TITLE; ?>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="create.php">Create</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <?php displayMessage(); ?>
+    <!-- Header Content -->

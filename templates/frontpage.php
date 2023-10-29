@@ -2,13 +2,14 @@
 
 <!-- Frontpage Section -->
 <div class="container mt-3">
-    <h1 class="page-title">Session</h1>
+    <h1 class="page-title">Sessions</h1>
     <div class="row mb-4">
         <div class="col-md-6">
-            <h5>Filter by Column</h5>
+            <h5>Filtrer par colonne:</h5>
             <div class="form-row">
                 <div class="col-md-6 mb-2">
                     <select id="filter-column" class="form-control">
+                        <!--option value="" disabled selected>--</option-->
                         <option value="Numero">Numero</option>
                         <option value="Annee">Annee</option>
                         <option value="Sem">Sem</option>
@@ -42,7 +43,7 @@
                     <th>Finsem</th>
                     <th>Annea</th>
                     <th>Anneab</th>
-                    <th>Actions</th>
+                    <th id="HeaderAction">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,7 +79,7 @@
                         <td>
                             <?php echo $session->Anneab; ?>
                         </td>
-                        <td>
+                        <td class="HeaderColumn" id="view<?php echo $session->Numero ?>">
                             <a class="btn btn-primary" href="Session.php?id=<?php echo $session->Numero; ?>">View</a>
                         </td>
                     </tr>
@@ -87,7 +88,7 @@
         </table>
     </div>
 
-    <button id="generate-pdf" class="btn btn-primary">Generate PDF</button>
+    <button id="print-data" class="btn btn-primary m-3">Print</button>
 </div>
 
 <!-- Add Bootstrap CSS and JavaScript -->
@@ -97,7 +98,9 @@
     const filterColumn = document.getElementById('filter-column');
     const filterValue = document.getElementById('filter-value');
     const tableRows = document.querySelectorAll('.table tbody tr');
-    const generatePdfButton = document.getElementById('generate-pdf');
+    const printButton = document.getElementById('print-data');
+    const theader = document.getElementById('HeaderAction');
+    const HeaderColumn = document.querySelectorAll('.HeaderColumn');
 
     filterColumn.addEventListener('change', () => {
         filterData(filterColumn.value, filterValue.value);
@@ -131,32 +134,25 @@
         return -1;
     }
 
-    generatePdfButton.addEventListener('click', () => {
-        const doc = new jsPDF();
-
-        const columns = [];
-        const tableHeaders = document.querySelectorAll('.table thead th');
-        tableHeaders.forEach(header => {
-            columns.push(header.textContent.trim());
+    printButton.addEventListener('click', () => {
+        // Hide the print button before printing
+        printButton.style.display = 'none';
+        theader.style.display = 'none';
+        HeaderColumn.forEach(element => {
+            element.style.display = 'none';
         });
+        // Print the document
+        window.print();
 
-        const data = [];
-        tableRows.forEach(row => {
-            const rowData = [];
-            row.querySelectorAll('td').forEach(cell => {
-                rowData.push(cell.textContent.trim());
-            });
-            data.push(rowData);
+        // Restore the print button after printing (optional)
+        printButton.style.display = 'block';
+        theader.style.display = 'block';
+        HeaderColumn.forEach(element => {
+            element.style.display = 'block';
         });
-
-        doc.autoTable({
-            head: [columns],
-            body: data,
-        });
-
-        doc.save('sessions.pdf');
     });
 </script>
+
 
 <!-- Footer Section -->
 <?php include 'inc/footer.php'; ?>

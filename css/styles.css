@@ -1,0 +1,37 @@
+body {
+    background-color: #FEFEFE;
+}
+
+.navbar {
+    background-color: #10539F;
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-color: #FFBE00;
+}
+
+.navbar-dark .navbar-toggler {
+    border: 2px solid #FFBE00;
+}
+
+.navbar-dark .navbar-toggler:focus,
+.navbar-dark .navbar-toggler:hover {
+    background-color: #FFBE00;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #FEFEFE;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #FFBE00;
+}
+
+.footer {
+    background-color: #264964;
+    color: #FEFEFE;
+}
+
+.footer a {
+    color: #FFBE00;
+}
