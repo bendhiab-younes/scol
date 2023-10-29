@@ -34,4 +34,5 @@ if (isset($_POST['submit'])) {
 
 $template = new Template('templates/session-edit.php');
 $template->session = $session->getSession($Numero);
+$template->sessions = $session->getAllSessions();
 echo $template;

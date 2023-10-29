@@ -1,8 +1,8 @@
 <?php include_once 'inc/header.php'; ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-md-2 m-2">
-            <div class="card">
+        <div class="col-md-8 offset-md-2">
+            <div class="card m-2">
                 <div class="card-header text-center">
                     <h5 class="card-title">Session Information</h5>
                 </div>

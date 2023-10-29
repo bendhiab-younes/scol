@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Session</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
     <?php include_once 'inc/header.php'; ?>
     <div class="container p-4 text-center">
@@ -13,15 +15,21 @@
         <form action="edit.php?id=<?php echo $session->Numero; ?>" method="post" class="mx-auto w-50">
             <div class="form-group">
                 <label>Année</label>
-                <input type="number" class="form-control" name="Annee" value="<?php echo $session->Annee; ?>">
+                <input type="number" min="1992" class="form-control" name="Annee" value="<?php echo $session->Annee; ?>">
             </div>
             <div class="form-group">
-                <label>Semestre</label>
-                <input type="number" class="form-control" name="Sem" value="<?php echo $session->Sem; ?>">
+                <label for="Sem">Semestre</label>
+                <select class="form-control" id="Sem" name="Sem">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
             </div>
             <div class="form-group">
-                <label>SemestreAb</label>
-                <input type="number" class="form-control" name="SemAb" value="<?php echo $session->SemAb; ?>">
+                <label for="SemAb">SemestreAb</label>
+                <select class="form-control" id="SemAb" name="SemAb">
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Debut</label>
@@ -41,20 +49,21 @@
             </div>
             <div class="form-group">
                 <label>Anneea</label>
-                <input type="number" class="form-control" name="Annea" value="<?php echo $session->Annea; ?>">
+                <input type="number" class="form-control" min="1992" name="Annea" value="<?php echo $session->Annea; ?>">
             </div>
             <div class="form-group">
                 <label>Anneab</label>
-                <input type="number" class="form-control" name="Anneab" value="<?php echo $session->Anneab; ?>">
+                <input type="number" class="form-control" min="1992" name="Anneab" value="<?php echo $session->Anneab; ?>">
             </div>
             <input type="submit" class="btn btn-primary" value="Editer" name="submit">
         </form>
     </div>
-    
+
     <!-- Include Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
 <?php include_once 'inc/footer.php'; ?>
