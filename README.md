@@ -1,4 +1,4 @@
-# Scolarité - Individual College Project
+# Scolarité - College Project
 
 Scolarité is an individual college project composed of various tasks. The primary focus is on the "Session" table from a database that resembles the college's (ISET de sousse) database.
 
@@ -43,15 +43,9 @@ The structure of the "Session" table in the database is as follows:
 In the project description, it's mentioned that there are additional tasks that will be updated later. Make sure to add detailed descriptions of these tasks as they become available.
 
 ## Usage
-Provide clear instructions on how to run and use the project or any specific steps needed to accomplish each task.
-
+still working...
 ## Contributions
-If you're open to contributions or collaboration on this project, specify how others can get involved and provide guidance on contributing.
 
 ## License
-You can include any relevant license information if applicable.
 
 ## Contact Information
-Include your contact information or ways for interested parties to reach out if they have questions or want to collaborate on the project.
-
-Feel free to explore and contribute to this project. Your feedback and contributions are highly valued. Thank you for your interest in Scolarité!
