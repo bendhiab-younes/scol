@@ -5,7 +5,7 @@
     <h1 class="page-title">Sessions</h1>
     <div class="row mb-4">
         <div class="col-md-6">
-            <h5>Filtrer par colonne:</h5>
+            <h5>1er filtre: </h5>
             <div class="form-row">
                 <div class="col-md-6 mb-2">
                     <select id="filter-column" class="form-control">
@@ -23,7 +23,33 @@
                     </select>
                 </div>
                 <div class="col-md-6 mb-2">
-                    <input type="text" id="filter-value" class="form-control" placeholder="Enter a value">
+                    <input type="text" id="filter-value" class="form-control" placeholder="Entrer une valeur">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5>2eme filtre: </h5>
+            <div class="form-row">
+                <div class="col-md-6 mb-2">
+                    <select id="filter-column2" class="form-control">
+                        <!--option value="" disabled selected>--</option-->
+                        <option value="Numero">Numero</option>
+                        <option value="Annee">Annee</option>
+                        <option value="Sem">Sem</option>
+                        <option value="Semab">Semab</option>
+                        <option value="Debut">Debut</option>
+                        <option value="Fin">Fin</option>
+                        <option value="Debsem">Debsem</option>
+                        <option value="Finsem">Finsem</option>
+                        <option value="Annea">Annea</option>
+                        <option value="Anneab">Anneab</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <input type="text" id="filter-value2" class="form-control" placeholder="Entrer une valeur">
                 </div>
             </div>
         </div>
@@ -95,27 +121,42 @@
 
 
 <script>
-    const filterColumn = document.getElementById('filter-column');
-    const filterValue = document.getElementById('filter-value');
     const tableRows = document.querySelectorAll('.table tbody tr');
     const printButton = document.getElementById('print-data');
     const theader = document.getElementById('HeaderAction');
     const HeaderColumn = document.querySelectorAll('.HeaderColumn');
 
-    filterColumn.addEventListener('change', () => {
-        filterData(filterColumn.value, filterValue.value);
-    });
+    //filter functions
+    function addFilterListener(columnId, valueId) {
+        const filterColumn = document.getElementById(columnId);
+        const filterValue = document.getElementById(valueId);
 
-    filterValue.addEventListener('input', () => {
-        filterData(filterColumn.value, filterValue.value);
-    });
+        const filterFunction = () => {
+            filterData();
+        };
 
-    function filterData(column, value) {
-        const filterRegex = new RegExp(value, 'i');
+        filterColumn.addEventListener('change', filterFunction);
+        filterValue.addEventListener('input', filterFunction);
+    }
+
+    addFilterListener('filter-column', 'filter-value');
+    addFilterListener('filter-column2', 'filter-value2');
+
+    function filterData() {
+        const column1 = document.getElementById('filter-column').value;
+        const value1 = document.getElementById('filter-value').value;
+        const column2 = document.getElementById('filter-column2').value;
+        const value2 = document.getElementById('filter-value2').value;
+
+        const filterRegex1 = new RegExp(value1, 'i');
+        const filterRegex2 = new RegExp(value2, 'i');
+
         tableRows.forEach(row => {
-            const cell = row.querySelector(`td:nth-child(${getColumnIndex(column)})`);
-            if (cell) {
-                if (filterRegex.test(cell.textContent)) {
+            const cell1 = row.querySelector(`td:nth-child(${getColumnIndex(column1)})`);
+            const cell2 = row.querySelector(`td:nth-child(${getColumnIndex(column2)})`);
+
+            if (cell1 && cell2) {
+                if (filterRegex1.test(cell1.textContent) && filterRegex2.test(cell2.textContent)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';

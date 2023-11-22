@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="SemAb">SemestreAb</label>
-                        <select class="form-control" id="SemAb" name="SemAb" disabled>
+                        <select class="form-control" id="SemAb" name="SemAb">
                             <option value="2">2</option>
                             <option value="1">1</option>
                         </select>
@@ -75,7 +75,7 @@
     /* if sem is 1 then semab must be 2 
 
 1st case : if Sem= 1
-Annee= should be an int , 
+Annee= an int , 
 set Semab =  2 , 
 Debut= dd/mm/Annee (the year here matches the value of Annee), 
 Fin= dd/mm/Annee+1(the year here matches the value of Annee+ 1 ), 
@@ -92,77 +92,94 @@ Annea= Annee-1 , Anneab= Annea+1 */
 
     document.getElementById('Sem').addEventListener('change', updateFields);
     document.getElementById('Annee').addEventListener('change', updateFields);
-    document.getElementById('Debut').addEventListener('change', updateSemDates);
-    document.getElementById('Fin').addEventListener('change', updateSemDates);
-
-    updateFields();
+    document.getElementById('Debut').addEventListener('change', function() {
+    var Sem = document.getElementById('Sem').value;
+    if (Sem === '1') {
+        document.getElementById('Debsem').value = this.value;
+    }
+});
+document.getElementById('Fin').addEventListener('change', function() {
+    var Sem = document.getElementById('Sem').value;
+    if (Sem === '2') {
+        document.getElementById('Finsem').value = this.value;
+    }
+});
 
     function updateFields() {
-    var Annee = getInputValue('Annee');
-    var Sem = getInputValue('Sem');
-    
-    // Check if Annee is empty and disable Sem
-    if (!Annee) {
-        document.getElementById('Sem').disabled = true;
-        return;
-    } else {
-        document.getElementById('Sem').disabled = false;
-    }
+        var Annee = document.getElementById('Annee').value;
+        var Sem = document.getElementById('Sem').value;
 
-        var isSem1 = Sem === '1';
-        document.getElementById('SemAb').value = isSem1 ? '2' : '1';
-        document.getElementById('Debut').value = formatDate(isSem1 ? parseInt(Annee) : parseInt(Annee) - 1);
-        document.getElementById('Fin').value = formatDate(isSem1 ? parseInt(Annee) + 1 : parseInt(Annee));
-        document.getElementById('Debsem').value = document.getElementById('Debut').value;
-        document.getElementById('Finsem').value = document.getElementById('Fin').value;
-        document.getElementById('Annea').value = isSem1 ? Annee : parseInt(Annee) - 1;
-        document.getElementById('Anneab').value = isSem1 ? parseInt(Annee) + 1 : parseInt(Annee);
-    }
+        if (!Annee) {
+            return; // If Annee is empty, don't do anything
+        }
 
-    function updateSemDates() {
-        var Sem = getInputValue('Sem');
         if (Sem === '1') {
-            document.getElementById('Debsem').value = this.value;
-            //document.getElementById('Debut').min = this.value;
+            document.getElementById('SemAb').value = '2';
+            //console.log(Annee)
+            document.getElementById('Debut').value = formatDate(parseInt(Annee));
+            var chosen_debut = document.getElementById('Debut').value;
+            document.getElementById('Debsem').value = chosen_debut;
+            document.getElementById('Fin').value = formatDate(parseInt(Annee) + 1);
+            document.getElementById('Finsem').value = formatDate(parseInt(Annee) + 1);
+            document.getElementById('Annea').value = Annee;
+            document.getElementById('Anneab').value = parseInt(Annee) + 1;
         } else if (Sem === '2') {
-            var Fin = getInputValue('Fin');
-            document.getElementById('Finsem').value = Fin;
+            document.getElementById('SemAb').value = '1';
+            document.getElementById('Debut').value = formatDate(parseInt(Annee ) -1 );
+            document.getElementById('Fin').value = formatDate(Annee);
+            document.getElementById('Finsem').value = formatDate(Annee);
+            document.getElementById('Annea').value = parseInt(Annee) - 1;
+            document.getElementById('Anneab').value = parseInt(Annee);
         }
     }
 
     function formatDate(year) {
-        return new Date(year, 1, 1).toISOString().split('T')[0];
+        var date = new Date(year, 1, 1); // This will create a date in YYYY-MM-DD format with the year you provide and January 1st as the month and day.
+        //console.log(date.toISOString().split('T')[0]);
+        return date.toISOString().split('T')[0]; // This will format the date in YYYY-MM-DD format.
     }
 
-    function getInputValue(id) {
-        return document.getElementById(id).value;
-    }
 
     function validateForm() {
+        // Clear all error messages
         clearErrors();
+
+        // Gather form values
+        var inputs = [];
         var inputIds = ['Annee', 'Sem', 'SemAb', 'Debut', 'Fin', 'Debsem', 'Finsem', 'Annea', 'Anneab'];
 
         for (var i = 0; i < inputIds.length; i++) {
             var inputId = inputIds[i];
-            var inputValue = getInputValue(inputId);
+            var inputValue = getInputvalue(inputId);
+            inputs.push(inputValue);
             if (!inputValue) {
                 document.getElementById(inputId + 'Error').textContent = 'Champ obligatoire.';
                 document.getElementById(inputId + 'Error').style.display = 'block';
             }
         }
 
-        return !inputIds.some(function (id) {
-            return getInputValue(id) === '';
-        });
+        // If any field is empty, prevent form submission
+        if (inputs.includes('')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function getInputvalue(id) {
+        var elem = document.getElementById(id).value;
+        console.log("getinputby id `$id`", elem);
+        return elem;
     }
 
     function clearErrors() {
-        document.querySelectorAll('.error-message').forEach(function (element) {
+        // Clear all error messages
+        var errorElements = document.querySelectorAll('.error-message');
+        errorElements.forEach(function (element) {
             element.textContent = '';
             element.style.display = 'none';
         });
     }
-
 </script>
 
 <?php include_once 'inc/footer.php'; ?>

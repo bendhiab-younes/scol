@@ -123,7 +123,6 @@ Annea= Annee-1 , Anneab= Annea+1 */
         var Sem = getInputValue('Sem');
         if (Sem === '1') {
             document.getElementById('Debsem').value = this.value;
-            //document.getElementById('Debut').min = this.value;
         } else if (Sem === '2') {
             var Fin = getInputValue('Fin');
             document.getElementById('Finsem').value = Fin;
