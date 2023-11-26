@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Sessions</title>
     <?php
     $urls = array();
@@ -17,21 +17,21 @@
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
     );
-    foreach ($scripts as $script) {
-        if (!in_array($script, $urls)) {
-            echo '<script src="' . $script . '"></script>' . PHP_EOL;
+    foreach($scripts as $script) {
+        if(!in_array($script, $urls)) {
+            echo '<script src="'.$script.'"></script>'.PHP_EOL;
             $urls[] = $script;
         }
     }
-    foreach ($stylesheets as $stylesheet) {
-        if (!in_array($stylesheet, $urls)) {
-            echo '<link rel="stylesheet" href="' . $stylesheet . '">' . PHP_EOL;
+    foreach($stylesheets as $stylesheet) {
+        if(!in_array($stylesheet, $urls)) {
+            echo '<link rel="stylesheet" href="'.$stylesheet.'">'.PHP_EOL;
             $urls[] = $stylesheet;
         }
     }
     ?>
 
-    
+
     <style>
         body {
             background-color: #FEFEFE;
@@ -69,6 +69,33 @@
 
         .footer a {
             color: #FFBE00;
+        }
+
+        @media print {
+            .HeaderColumn2 {
+                display: none;
+            }
+
+            .HeaderColumn {
+                display: none;
+            }
+
+            #HeaderAction2 {
+                display: none;
+            }
+            #HeaderAction1 {
+                display: none;
+            }
+            #print-data {
+                display: none;
+            }
+            #filter2 {
+                display: none;
+            }
+            #filter1 {
+                display: none;
+            }
+
         }
     </style>
 </head>

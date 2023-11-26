@@ -1,9 +1,10 @@
 <?php include 'inc/header.php'; ?>
 
 <!-- Frontpage Section -->
+
 <div class="container mt-3">
     <h1 class="page-title">Sessions</h1>
-    <div class="row mb-4">
+    <div id="filter1" class="row mb-4">
         <div class="col-md-6">
             <h5>1er filtre: </h5>
             <div class="form-row">
@@ -29,7 +30,7 @@
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div id="filter2" class="row mb-4">
         <div class="col-md-6">
             <h5>2eme filtre: </h5>
             <div class="form-row">
@@ -69,12 +70,12 @@
                     <th>Finsem</th>
                     <th>Annea</th>
                     <th>Anneab</th>
-                    <th id="HeaderAction">Voir</th>
-                    <th id="HeaderAction">Supprimer</th>
+                    <th id="HeaderAction1">Voir</th>
+                    <th id="HeaderAction2">Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($sessions as $session): ?>
+                <?php foreach($sessions as $session): ?>
                     <tr>
                         <td>
                             <?php echo $session->Numero; ?>
@@ -109,7 +110,7 @@
                         <td class="HeaderColumn" id="view<?php echo $session->Numero ?>">
                             <a class="btn btn-primary" href="Session.php?id=<?php echo $session->Numero; ?>">voir</a>
                         </td>
-                        <td>
+                        <td class="HeaderColumn2">
                             <form style="display: inline;" method="post" action="Session.php">
                                 <input type="hidden" name="del_id" value="<?php echo $session->Numero; ?>">
                                 <input type="submit" class="btn btn-danger" value="Supprimer">
@@ -130,7 +131,8 @@
 <script>
     const tableRows = document.querySelectorAll('.table tbody tr');
     const printButton = document.getElementById('print-data');
-    const theader = document.getElementById('HeaderAction');
+    const theader = document.getElementById('HeaderAction1');
+    const theader2 = document.getElementById('HeaderAction2');
     const HeaderColumn = document.querySelectorAll('.HeaderColumn');
 
     //filter functions
@@ -183,22 +185,23 @@
     }
 
     printButton.addEventListener('click', () => {
-        // Hide the print button before printing
-        printButton.style.display = 'none';
-        theader.style.display = 'none';
-        HeaderColumn.forEach(element => {
-            element.style.display = 'none';
-        });
         // Print the document
         window.print();
-
-        // Restore the print button after printing (optional)
-        printButton.style.display = 'block';
-        theader.style.display = 'block';
-        HeaderColumn.forEach(element => {
-            element.style.display = 'block';
-        });
     });
+    /*
+      // Hide the print button before printing
+      printButton.style.display = 'none';
+      theader.style.display = 'none';
+      HeaderColumn.forEach(element => {
+          element.style.display = 'none';
+      });
+
+      // Restore the print button after printing (optional)
+      printButton.style.display = 'block';
+      theader.style.display = 'block';
+      HeaderColumn.forEach(element => {
+          element.style.display = 'block';
+      });*/
 </script>
 
 
