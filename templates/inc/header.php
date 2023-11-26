@@ -3,7 +3,7 @@
 
 <head>
 <link rel="stylesheet" href="css/styles.css">
-    <title>Header Sessions</title>
+    <title>Sessions</title>
     <?php
     $urls = array();
     $scripts = array(

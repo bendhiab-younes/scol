@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row mb-4">
         <div class="col-md-6">
             <h5>2eme filtre: </h5>
@@ -69,7 +69,8 @@
                     <th>Finsem</th>
                     <th>Annea</th>
                     <th>Anneab</th>
-                    <th id="HeaderAction">Actions</th>
+                    <th id="HeaderAction">Voir</th>
+                    <th id="HeaderAction">Supprimer</th>
                 </tr>
             </thead>
             <tbody>
@@ -106,8 +107,14 @@
                             <?php echo $session->Anneab; ?>
                         </td>
                         <td class="HeaderColumn" id="view<?php echo $session->Numero ?>">
-                            <a class="btn btn-primary" href="Session.php?id=<?php echo $session->Numero; ?>">View</a>
+                            <a class="btn btn-primary" href="Session.php?id=<?php echo $session->Numero; ?>">voir</a>
                         </td>
+                        <td>
+                            <form style="display: inline;" method="post" action="Session.php">
+                                <input type="hidden" name="del_id" value="<?php echo $session->Numero; ?>">
+                                <input type="submit" class="btn btn-danger" value="Supprimer">
+                        </td>
+                        </form>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
